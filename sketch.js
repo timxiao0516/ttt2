@@ -1,3 +1,10 @@
+/*
+MoveNet Skeleton - Steve's Makerspace (大部分代碼來自 TensorFlow)
+留言
+
+MoveNet 由 TensorFlow 開發:
+https://www.tensorflow.org/hub/tutorials/movenet
+*/
 let video, bodypose, pose, keypoint, detector; // 定義變量
 let poses = [];
 let img; // 用於存放您的物件圖片
