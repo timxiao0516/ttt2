@@ -119,24 +119,56 @@ function drawSkeleton() {
         let leftEye = pose.keypoints[1];
         let rightEye = pose.keypoints[2];
         if (leftEye.score > 0.1) {
-            leftEyeX = (leftEyeX + leftEyeSpeed) % width;
-            image(img, leftEyeX - 25, leftEye.y - 25, 50, 50); // 繪製圖片
+            if (leftEyeX === undefined) {
+                leftEyeX = leftEye.x; // 初始化左眼位置
+                leftEyeY = leftEye.y;
+            } else {
+                leftEyeX += leftEyeSpeed;
+                if (leftEyeX > width) {
+                    leftEyeX = -25; // 重置位置
+                }
+            }
+            image(img, leftEyeX - 25, leftEyeY - 25, 50, 50); // 繪製圖片
         }
         if (rightEye.score > 0.1) {
-            rightEyeX = (rightEyeX + rightEyeSpeed) % width;
-            image(img, rightEyeX - 25, rightEye.y - 25, 50, 50); // 繪製圖片
+            if (rightEyeX === undefined) {
+                rightEyeX = rightEye.x; // 初始化右眼位置
+                rightEyeY = rightEye.y;
+            } else {
+                rightEyeX += rightEyeSpeed;
+                if (rightEyeX > width) {
+                    rightEyeX = -25; // 重置位置
+                }
+            }
+            image(img, rightEyeX - 25, rightEyeY - 25, 50, 50); // 繪製圖片
         }
 
         // 在手腕位置繪製物件圖片，並從右往左移動
         let leftWrist = pose.keypoints[9];
         let rightWrist = pose.keypoints[10];
         if (leftWrist.score > 0.1) {
-            leftWristX = (leftWristX - leftWristSpeed + width) % width;
-            image(img, leftWristX - 25, leftWrist.y - 25, 50, 50); // 繪製圖片
+            if (leftWristX === undefined) {
+                leftWristX = leftWrist.x; // 初始化左手腕位置
+                leftWristY = leftWrist.y;
+            } else {
+                leftWristX -= leftWristSpeed;
+                if (leftWristX < -25) {
+                    leftWristX = width; // 重置位置
+                }
+            }
+            image(img, leftWristX - 25, leftWristY - 25, 50, 50); // 繪製圖片
         }
         if (rightWrist.score > 0.1) {
-            rightWristX = (rightWristX - rightWristSpeed + width) % width;
-            image(img, rightWristX - 25, rightWrist.y - 25, 50, 50); // 繪製圖片
+            if (rightWristX === undefined) {
+                rightWristX = rightWrist.x; // 初始化右手腕位置
+                rightWristY = rightWrist.y;
+            } else {
+                rightWristX -= rightWristSpeed;
+                if (rightWristX < -25) {
+                    rightWristX = width; // 重置位置
+                }
+            }
+            image(img, rightWristX - 25, rightWristY - 25, 50, 50); // 繪製圖片
         }
 
         // 在頭頂上方顯示學號和姓名
